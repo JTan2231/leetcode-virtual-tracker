@@ -1,18 +1,20 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "Leetcode Virtual Tracker",
     "version": "1.0",
     "description": "Highlights virtual contests that the user has already participated in.",
     "permissions": [
         "activeTab",
-        "cookies",
-        "<all_urls>"
+        "cookies"
+    ],
+    "host_permissions": [
+        "http://leetcode.com/*",
+        "https://leetcode.com/*",
+        "http://www.leetcode.com/*",
+        "https://www.leetcode.com/*"
     ],
     "background": {
-        "scripts": [
-            "background.js"
-        ],
-        "persistent": false
+        "service_worker": "background.js"
     },
     "content_scripts": [
         {
