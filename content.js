@@ -16,8 +16,12 @@ function colorDiv(slug,count) {
 }
 
 function clearDivs() {
-    let coloredElements = document.querySelectorAll('div[style="background-color: black;"]');
-    coloredElements.forEach(element => {
+    let completedContests = document.querySelectorAll('div[style="background-color: rgb(20, 61, 17);"]');
+    let partiallyCompletedContests = document.querySelectorAll('div[style="background-color: rgb(129, 135, 57);"]');
+    completedContests.forEach(element => {
+        element.style.backgroundColor = '';
+    });
+    partiallyCompletedContests.forEach(element => {
         element.style.backgroundColor = '';
     });
 }
@@ -65,11 +69,11 @@ chrome.runtime.sendMessage(
 document.body.addEventListener('click', (event) => {
     let content = event.target.textContent.trim();
     if (!isNaN(content) || content == "<" || content == ">") {
-
+        clearDivs();
         setTimeout(() => {console.log("Waiting for contests to load"),1000});
 
         const storedData = localStorage.getItem('virtuals');
-        clearDivs();
+        
         if (storedData) {
             const keyValueArray = JSON.parse(storedData);
             for (const o of keyValueArray.data.allVirtualContestScoresPagified.data) {
